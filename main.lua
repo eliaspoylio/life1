@@ -38,7 +38,6 @@ function love.update()
     if love.keyboard.isDown('backspace') then
       clear()
     end
-
     if love.keyboard.isDown('o') then
       exportjson()
     end
@@ -52,7 +51,7 @@ end
 
 function love.keypressed(key, scancode, isrepeat)
     if key == 'space' then
-      magic()
+      life()
     end
 end
 
@@ -88,7 +87,7 @@ end
 
 
 --function love.keypressed()
-function magic()
+function life()
     local nextGrid = {}
     for y = 1, gridYCount do
         nextGrid[y] = {}
@@ -150,7 +149,6 @@ function exportimage()
       end
     end
   end
-  --img = love.graphics.newImage(ImageData)
   filedata = ImageData:encode( "png", "lifeimage.png" )
   text = "export image"
 end
@@ -164,27 +162,4 @@ function love.wheelmoved(x, y)
         text = "Mouse wheel moved down"
         cellsInNewGrid = cellsInNewGrid-1
     end
---[[
-    local nextGrid = {}
-    for y = 1, gridYCount do
-        nextGrid[y] = {}
-        for x = 1, gridXCount do
-            local neighbourCount = 0
-
-            for dy = -1, 1 do
-                for dx = -1, 1 do
-                    if not (dy == 0 and dx == 0)
-                    and grid[y + dy]
-                    and grid[y + dy][x + dx] then
-                        neighbourCount = neighbourCount + 1
-                    end
-                end
-            end
-
-            nextGrid[y][x] = neighbourCount == cellsInNewGrid or (grid[y][x] and neighbourCount == 2)
-        end
-    end
-
-    grid = nextGrid
---]]
 end
